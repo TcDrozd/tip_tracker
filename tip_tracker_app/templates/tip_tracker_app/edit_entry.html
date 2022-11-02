@@ -1,0 +1,10 @@
+{% extends "tip_tracker_app/base.html" %}
+
+{% block content %}
+<p>Edit entry:</p>
+<form action="{% url 'tip_tracker_app:edit_entry' entry.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">save</button>
+</form>
+{% endblock content %}

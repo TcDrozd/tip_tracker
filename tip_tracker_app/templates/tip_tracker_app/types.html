@@ -1,0 +1,15 @@
+{% extends "tip_tracker_app/base.html" %}
+
+{% block content %}
+<p>Type: {{type}}</p>
+
+<ul>
+    {% for type in types %}
+    <li>
+        <a href="{% url 'tip_tracker_app:type' type.id %}">{{ type }}</a> <!-- FIX THIS ONE -->
+    </li>
+    {% empty %}
+    <li>No Entries have been recorded yet.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

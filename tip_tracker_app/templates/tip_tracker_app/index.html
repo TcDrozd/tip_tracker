@@ -1,0 +1,11 @@
+{% extends "tip_tracker_app/base.html" %}
+
+{% block content %}
+<p>
+    Tip Tracker for helping to track tips, CC, cash, and wages paid. then maybe account for taxes
+</p>
+<p>
+    <a href="{% url 'tip_tracker_app:new_entry' %}">add a new entry</a>
+</p>
+
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "tip_tracker_app/base.html" %}
+
+{% block content %}
+<p>Entries:</p>
+
+<a href="{% url 'tip_tracker_app:new_entry' %}">add a new entry</a>
+
+<ul>
+    {% for entry in entries %}
+
+    <li>
+        <a href="{% url 'tip_tracker_app:edit_entry' entry.id %}">
+            {{entry.tip}} <!-- FIX THE TYPE TAGS -->
+        </a>
+        - {{entry.type}} ({{entry.date_added}})
+    </li>
+    {% empty %}
+    <li>No Entries have been recorded yet.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

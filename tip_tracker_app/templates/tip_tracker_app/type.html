@@ -1,0 +1,18 @@
+{% extends "tip_tracker_app/base.html" %}
+
+{% block content %}
+<p>Type: {{type}}</p>
+<p>Logs:</p>
+<ul>
+    {% for entry in entries %}
+    <li>
+        <p>{{entry.date_added}}:   {{entry.tip}}</p>
+        <p>
+            <a href="{% url 'tip_tracker_app:edit_entry' entry.id%} ">edit entry</a>
+        </p>
+    </li>
+    {% empty %}
+    <li>No Entries have been recorded yet.</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

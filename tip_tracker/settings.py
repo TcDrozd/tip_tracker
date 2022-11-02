@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #   MY APPS
     'tip_tracker_app',
+    'users',
 ]
 
 MIDDLEWARE = [

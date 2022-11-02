@@ -2,30 +2,33 @@ from django.db import models
 
 # Create your models here.
 
-
+TIP_TYPE = (
+    ('Cash', 'cash'),
+    ('CC', 'credit card'),
+)
 class Tip_Type(models.Model):
     """ The type of tip to be entered """
-    TipType = models.TextChoices('Cash', 'Credit Card')
-    name = models.CharField(max_length=60)
-    tip = models.CharField(blank=True,
-                           choices = TipType.choices,
-                           max_length=10,
-                           )
+    #name = models.CharField(max_length=30)
+    type = models.CharField(
+        choices=TIP_TYPE,
+        default='Cash',
+        max_length=15
+    )
     class Meta:
         verbose_name_plural = 'tip types'
+    def __str__(self):
+        """ Returns a string representation of the model """
+        return self.type
 
 class Tip_Entry(models.Model):
     """ An entry into the tip logger of type tip_type """
-    tip_type = models.ForeignKey(
+    #name = models.FloatField(default=0)
+    type = models.ForeignKey(
         Tip_Type,
         on_delete=models.CASCADE,
-        default=0
+        related_name='tiptype'
     )
-    amt = models.FloatField()
+    tip = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     date_added = models.DateField(auto_now_add=True)
     class Meta:
         verbose_name_plural = 'tip entries'
-
-    def __float__(self):
-        """ Return a string representation of the model. """
-        return self.amt
