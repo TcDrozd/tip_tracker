@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Tip_Type(models.Model):
         default='Cash',
         max_length=15
     )
+
     class Meta:
         verbose_name_plural = 'tip types'
     def __str__(self):
@@ -30,5 +32,11 @@ class Tip_Entry(models.Model):
     )
     tip = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     date_added = models.DateField(auto_now_add=True)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='owner',
+        null=True
+    )
     class Meta:
         verbose_name_plural = 'tip entries'
