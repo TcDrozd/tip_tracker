@@ -6,10 +6,11 @@
 <ul>
     {% for type in types %}
     <li>
-        <a href="{% url 'tip_tracker_app:type' type.id %}">{{ type }}</a> <!-- FIX THIS ONE -->
+        <a href="{% url 'tip_tracker_app:type' 1 %}" >{{ type }}</a>
+        <a href="{% url 'tip_tracker_app:type' 2 %}">Credit</a><!-- FIX THIS ONE -->
     </li>
     {% empty %}
-    <li>No Entries have been recorded yet.</li>
+    No Entries have been recorded yet.
     {% endfor %}
 </ul>
 {% endblock content %}

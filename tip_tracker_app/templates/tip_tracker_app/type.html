@@ -4,13 +4,23 @@
 <p>Type: {{type}}</p>
 <p>Logs:</p>
 <ul>
-    {% for entry in entries %}
 
-    <li>
-        <a href="{% url 'tip_tracker_app:edit_entry' entry.id %}">
-            {{entry.tip}} <!-- FIX THE TYPE TAGS -->
-        </a>
-        - {{entry.type}} ({{entry.date_added}})
+{% for entry in entries %}
+
+    <li class="list-group-item">
+        <span>
+            <div class="col-sm">
+            <a href="{% url 'tip_tracker_app:edit_entry' entry.id %}">
+                {{entry.tip}} <!-- FIX THE TYPE TAGS -->
+            </a>
+            </div>
+            <div class="col-sm">
+                {{entry.type}}
+            </div>
+            <div class="col-sm">
+                ({{entry.date_added}})
+            </div>
+        </span>
     </li>
     {% empty %}
     <li>No Entries have been recorded yet.</li>

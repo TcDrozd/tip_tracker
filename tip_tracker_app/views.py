@@ -16,7 +16,7 @@ def index(request):
 def entries(request):
     """ Each individual tip logged """
     entries = Tip_Entry.objects.filter(owner=request.user).order_by('date_added')
-    context = {'entries':entries}
+    context = {'entries':entries, 'types':types}
     return render(request, 'tip_tracker_app/entries.html', context)
 
 @login_required
@@ -29,7 +29,8 @@ def types(request):
 @login_required
 def type(request, type_id):
     """ Show a single type of tip and all its entries (cash/CC) """
-    entries = Tip_Entry.objects.filter(owner=request.user, id=type_id).order_by('date_added')
+    entries = Tip_Entry.objects.all().filter(owner__id=request.user.id).order_by('-date_added')
+    entries = entries.filter(type__id=type_id)
     type = Tip_Type.objects.get(id=type_id)
 
     context = {'type':type, 'entries':entries}
@@ -48,7 +49,7 @@ def new_entry(request):
             new_entry = form.save(commit=False)
             new_entry.owner = request.user
             new_entry.save()
-            return HttpResponseRedirect(reverse('tip_tracker_app:types'))
+            return HttpResponseRedirect(reverse('tip_tracker_app:entries'))
     context = {'form':form}
     return render(request, 'tip_tracker_app/new_entry.html', context)
 

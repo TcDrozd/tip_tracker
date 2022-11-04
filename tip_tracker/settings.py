@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #   THIRD PARTY APPS
+    'bootstrap4',
+
     #   MY APPS
     'tip_tracker_app',
     'users',
+
 ]
 
 MIDDLEWARE = [
@@ -127,4 +131,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MY SETTINGS
-LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/entries/'
+
+#   Settings for django-bootstrap4
+BOOTSTRAP4 = {
+    'include_jquery':True,
+}

@@ -1,18 +1,31 @@
 {% extends "tip_tracker_app/base.html" %}
 
 {% block content %}
-<p>Entries:</p>
+<h3 class="font-monospace fs-1 fw-normal" style="color: rgb(44,17,30);background: rgba(0,150,208,0.32);border-top-left-radius: 5px;border-top-right-radius: 5px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">Entries:</h3>
 
 <a href="{% url 'tip_tracker_app:new_entry' %}">add a new entry</a>
-
 <ul>
+        <a class="btn btn-primary" role="button" href="{% url 'tip_tracker_app:type' 1 %}">Cash</a>
+        <a class="btn btn-dark me-2" role="button" href="{% url 'tip_tracker_app:type' 2 %}">Credit</a><!-- maybe don't hard-code this id num? it won't change either way tho -->
+</ul>
+<ul class="list-group">
+
     {% for entry in entries %}
 
-    <li>
-        <a href="{% url 'tip_tracker_app:edit_entry' entry.id %}">
-            {{entry.tip}} <!-- FIX THE TYPE TAGS -->
-        </a>
-        - {{entry.type}} ({{entry.date_added}})
+    <li class="list-group-item">
+        <span>
+            <div class="col-sm">
+            <a href="{% url 'tip_tracker_app:edit_entry' entry.id %}">
+                {{entry.tip}} <!-- FIX THE TYPE TAGS -->
+            </a>
+            </div>
+            <div class="col-sm">
+                {{entry.type}}
+            </div>
+            <div class="col-sm">
+                ({{entry.date_added}})
+            </div>
+        </span>
     </li>
     {% empty %}
     <li>No Entries have been recorded yet.</li>
